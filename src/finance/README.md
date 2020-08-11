@@ -19,9 +19,7 @@
 
 # 数据
 
-数据来源于 [新浪财经](https://hq.sinajs.cn)  接口，均为实时查询；
-
-行情数据特别是基金实时估值，均来源于新浪财经，不对准确性做任何保证；
+数据来源于 [新浪财经](https://hq.sinajs.cn)  接口，均为实时查询，不对准确性做任何保证；
 
 
 
@@ -62,13 +60,16 @@
 - 设置 **Quicklook** 显示的图表类型： `fin chart chart_type`，例如：`fin chart daily`；
 
   - `daily`：近期行情走势图，以天为单位;
-![chart_daily](https://github.com/marsmay/alfred/blob/master/src/finance/images/chart_daily.jpg?raw=true)
+  
+	![chart_daily](https://github.com/marsmay/alfred/blob/master/src/finance/images/chart_daily.jpg?raw=true)
 
+  
   - `today`：当天行情走势图，以分钟为单位;
-![chart_today](https://github.com/marsmay/alfred/blob/master/src/finance/images/chart_today.jpg?raw=true)
+  
+  ![chart_today](https://github.com/marsmay/alfred/blob/master/src/finance/images/chart_today.jpg?raw=true)
+  
     
-    
-    
+  
 
 ## 查询指令
 
@@ -84,7 +85,7 @@
 
 # 自定义
 
-需要进行自定义调整或添加功能，可以直接修改 `src/main.go`，并使用 `GO111MODULE="off" go build -o fin main.go` 指令编译可执行文件，并替换 `workflow` 中的可执行文件 `fin`；
+需要进行自定义调整或添加功能，可以直接修改 `src/finance` 中的 **golang** 源代码，并使用 `make fin` 指令编译可执行文件，并替换安装后的 `workflow` 目录中的可执行文件 `fin`；
 
 
 
