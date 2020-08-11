@@ -62,9 +62,12 @@
 - 设置 **Quicklook** 显示的图表类型： `fin chart chart_type`，例如：`fin chart daily`；
 
   - `daily`：近期行情走势图，以天为单位;
+![chart_daily](https://github.com/marsmay/alfred/blob/master/src/finance/images/chart_daily.jpg?raw=true)
 
   - `today`：当天行情走势图，以分钟为单位;
-
+![chart_today](https://github.com/marsmay/alfred/blob/master/src/finance/images/chart_today.jpg?raw=true)
+    
+    
     
 
 ## 查询指令
