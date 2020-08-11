@@ -3,7 +3,7 @@
 
 因为 macos 自带的股票软件不实时，延误了 15 分钟，而且看不到基金，于是自己做了一个能够实时查看股票基金行情的 Alfred 插件。
 
-点这里下载打包好的插件，[插件下载](https://github.com/marsmay/chinaFinance/blob/master/ChinaFinance.alfredworkflow?raw=true)。
+点这里下载打包好的插件，[插件下载](https://github.com/marsmay/alfred/blob/master/src/finance/Finance.alfredworkflow?raw=true)。
 
 
 
@@ -71,11 +71,11 @@
 
 - 查询指定股票、基金行情：`fin code`，例如：`fin sh000001`；
 
-![search](https://github.com/marsmay/chinaFinance/blob/master/images/search.jpg?raw=true)
+![search](https://github.com/marsmay/alfred/blob/master/src/finance/images/search.jpg?raw=true)
 
 - 查询自选列表行情：`fin`
 
-![list](https://github.com/marsmay/chinaFinance/blob/master/images/list.jpg?raw=true)
+![list](https://github.com/marsmay/alfred/blob/master/src/finance/images/list.jpg?raw=true)
 
 
 
