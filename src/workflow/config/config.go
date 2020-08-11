@@ -1,8 +1,8 @@
 package config
 
 import (
+	"alfred/workflow/output"
 	"encoding/json"
-	"github.com/marsmay/alfred/workflow/output"
 	"io/ioutil"
 	"os"
 	"path"
