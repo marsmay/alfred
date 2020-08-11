@@ -2,6 +2,7 @@ package logic
 
 import (
 	"alfred/workflow/output"
+	"alfred/workflow/util"
 	"fmt"
 	"math/rand"
 	"strconv"
@@ -29,7 +30,7 @@ func (s *Stock) ToItem(chart string) (item *output.Item) {
 		Valid:     true,
 		Title:     fmt.Sprintf("%s  %.2f (%+.2f %+.2f%%)", s.Name, s.CurrentPrice, s.CurrentGainAmount, s.CurrentGainRatio),
 		SubTitle:  fmt.Sprintf("昨收: %.2f, 今开: %.2f, 振幅: %.2f ~ %.2f (%.2f%%) [%s]", s.PrevClosePrice, s.OpenPrice, s.LowPrice, s.HighPrice, (s.HighPrice-s.LowPrice)*100/s.PrevClosePrice, s.Time.Format(DtLayout)),
-		Icon:      &output.Icon{Path: output.IconDefault},
+		Icon:      output.NewIcon(output.IconDefault),
 		Arguments: fmt.Sprintf(DetailStockUri, s.Code),
 	}
 
@@ -66,7 +67,7 @@ func parseStock(code, content string) (item IItem, err error) {
 		return
 	}
 
-	if stock.Name, err = gbkToUtf8(info[0]); err != nil {
+	if stock.Name, err = util.GbkToUtf8(info[0]); err != nil {
 		return
 	}
 

@@ -16,6 +16,9 @@ update_dep:
 fin:
 	cd src/finance; ${ENVARG} go build ${BUILDARG} -o ../../bin/fin main.go;
 
+currency:
+	cd src/currency; ${ENVARG} go build ${BUILDARG} -o ../../bin/currency main.go;
+
 clean:
 	rm -fr bin/*
 	chmod -R 766 pkg/*

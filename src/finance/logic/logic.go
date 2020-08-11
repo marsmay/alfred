@@ -3,13 +3,9 @@ package logic
 import (
 	"alfred/workflow/config"
 	"alfred/workflow/output"
-	"bytes"
+	"alfred/workflow/util"
 	"fmt"
-	"golang.org/x/text/encoding/simplifiedchinese"
-	"golang.org/x/text/transform"
-	"io/ioutil"
 	"math/rand"
-	"net/http"
 	"os"
 	"sort"
 	"strings"
@@ -20,17 +16,6 @@ type Config struct {
 	Sort  string   `json:"sort"`
 	Chart string   `json:"chart"`
 	Codes []string `json:"codes"`
-}
-
-func gbkToUtf8(from string) (to string, err error) {
-	reader := transform.NewReader(bytes.NewReader([]byte(from)), simplifiedchinese.GBK.NewDecoder())
-	bs, err := ioutil.ReadAll(reader)
-
-	if err == nil {
-		to = string(bs)
-	}
-
-	return
 }
 
 func parseTime(ymd, his string) (t time.Time, err error) {
@@ -83,29 +68,7 @@ func getData(codes []string) (items []IItem, err error) {
 	}
 
 	uri := fmt.Sprintf(ApiUri, rand.Float64(), strings.Join(codes, ","))
-	req, err := http.NewRequest("GET", uri, nil)
-
-	if err != nil {
-		return
-	}
-
-	client := &http.Client{Timeout: 3 * time.Second}
-	resp, err := client.Do(req)
-
-	if err != nil {
-		return
-	}
-
-	defer func() {
-		_ = resp.Body.Close()
-	}()
-
-	if resp.StatusCode != 200 {
-		err = fmt.Errorf("error http code %d", resp.StatusCode)
-		return
-	}
-
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := util.HttpRequest(uri, nil, nil)
 
 	if err != nil {
 		return

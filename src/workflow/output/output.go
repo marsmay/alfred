@@ -57,8 +57,12 @@ type Result struct {
 	Items []*Item `json:"items"`
 }
 
+func NewIcon(path string) (icon *Icon) {
+	return &Icon{Path: path}
+}
+
 func NewNotice(message string, err error) (res *Result) {
-	item := &Item{Valid: true, Title: message, Icon: &Icon{Path: IconDefault}}
+	item := &Item{Title: message, Icon: NewIcon(IconDefault)}
 
 	if err != nil {
 		item.SubTitle = err.Error()

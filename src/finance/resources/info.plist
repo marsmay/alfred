@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>cn.ac.may.chinaFinance</string>
+	<string>cn.ac.may.finance</string>
 	<key>category</key>
 	<string>Productivity</string>
 	<key>connections</key>
@@ -123,8 +123,8 @@
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>1.0.4</string>
+	<string>1.0.5</string>
 	<key>webaddress</key>
-	<string>https://github.com/marsmay/chinaFinance</string>
+	<string>https://github.com/marsmay/alfred</string>
 </dict>
 </plist>
