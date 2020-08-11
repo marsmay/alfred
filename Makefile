@@ -13,11 +13,14 @@ dep:
 update_dep:
 	cd src; ${ENVARG} go get -u ./...; go mod tidy; cd -
 
-fin:
+finance:
 	cd src/finance; ${ENVARG} go build ${BUILDARG} -o ../../bin/fin main.go;
 
 currency:
 	cd src/currency; ${ENVARG} go build ${BUILDARG} -o ../../bin/currency main.go;
+
+youdao:
+	cd src/youdao; ${ENVARG} go build ${BUILDARG} -o ../../bin/youdao main.go;
 
 clean:
 	rm -fr bin/*

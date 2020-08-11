@@ -28,8 +28,8 @@ type Icon struct {
 
 type Mod struct {
 	Valid     bool   `json:"valid"`
-	Arguments string `json:"arg,omitempty"`
 	SubTitle  string `json:"subtitle,omitempty"`
+	Arguments string `json:"arg,omitempty"`
 	Icon      *Icon  `json:"icon,omitempty"`
 }
 
