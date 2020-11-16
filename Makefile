@@ -1,11 +1,9 @@
 #!/bin/bash
 export LANG=zh_CN.UTF-8
 
-ENVARG=GOPATH=$(CURDIR) GO111MODULE=on
+ENVARG=GO111MODULE=on
 LINUXARG=CGO_ENABLED=0 GOOS=darwin GOARCH=amd64
 BUILDARG=-ldflags " -s -X main.buildTime=`date '+%Y-%m-%dT%H:%M:%S'` -X main.gitHash=`git symbolic-ref --short -q HEAD`:`git rev-parse HEAD`"
-
-export GOPATH
 
 dep:
 	cd src; ${ENVARG} go get ./...; cd -

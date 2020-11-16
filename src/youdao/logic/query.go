@@ -42,9 +42,18 @@ type RespBasic struct {
 	Explains   []string `json:"explains"`
 }
 
-func newWordItem(word, explain, icon, quicklook string) (item *output.Item) {
-	soundWord := "🔊" + word
-	soundExplain := "🔊" + explain
+func (r *Resp) wordItem(word, explain, icon string) (item *output.Item) {
+	var readWord, readExplain string
+	soundWord, soundExplain := "🔊"+word, "🔊"+explain
+
+	if r.Convert == ConvertCn2En {
+		readWord = "🔊🇨🇳" + word
+		readExplain = "🔊🇺🇸" + explain
+	} else {
+		readWord = "🔊🇺🇸" + word
+		readExplain = "🔊🇨🇳" + explain
+	}
+
 	copyText := word + "\n" + explain
 
 	return &output.Item{
@@ -52,11 +61,11 @@ func newWordItem(word, explain, icon, quicklook string) (item *output.Item) {
 		Title:        explain,
 		SubTitle:     word,
 		Arguments:    copyText,
-		QuicklookUrl: quicklook,
+		QuicklookUrl: QuicklookUrl + url.QueryEscape(r.Query),
 		Icon:         output.NewIcon(icon),
 		Mods: map[string]*output.Mod{
-			output.ModKeyCmd: {Valid: true, Arguments: soundWord, SubTitle: soundWord},
-			output.ModKeyAlt: {Valid: true, Arguments: soundExplain, SubTitle: soundExplain},
+			output.ModKeyCmd: {Valid: true, Arguments: readWord, SubTitle: soundWord},
+			output.ModKeyAlt: {Valid: true, Arguments: readExplain, SubTitle: soundExplain},
 		},
 		Text: &output.Text{Copy: copyText, LargeType: copyText},
 	}
@@ -76,7 +85,6 @@ func parseData(content []byte) (items []*output.Item, err error) {
 
 	items = make([]*output.Item, 0, 8)
 	existExplains := map[string]bool{}
-	quicklook := QuicklookUrl + url.QueryEscape(resp.Query)
 
 	if resp.Basic != nil {
 		var phonetics []string
@@ -95,7 +103,7 @@ func parseData(content []byte) (items []*output.Item, err error) {
 
 		if len(phonetics) > 0 {
 			explain := strings.Join(phonetics, " ")
-			items = append(items, newWordItem(resp.Query, explain, IconTranslateSay, quicklook))
+			items = append(items, resp.wordItem(resp.Query, explain, IconTranslateSay))
 			existExplains[explain] = true
 		}
 	}
@@ -106,7 +114,7 @@ func parseData(content []byte) (items []*output.Item, err error) {
 				continue
 			}
 
-			items = append(items, newWordItem(resp.Query, explain, IconTranslate, quicklook))
+			items = append(items, resp.wordItem(resp.Query, explain, IconTranslate))
 			existExplains[explain] = true
 		}
 	}
@@ -117,7 +125,7 @@ func parseData(content []byte) (items []*output.Item, err error) {
 				continue
 			}
 
-			items = append(items, newWordItem(resp.Query, explain, IconTranslate, quicklook))
+			items = append(items, resp.wordItem(resp.Query, explain, IconTranslate))
 			existExplains[explain] = true
 		}
 	}
@@ -130,7 +138,7 @@ func parseData(content []byte) (items []*output.Item, err error) {
 				continue
 			}
 
-			items = append(items, newWordItem(phrase.Key, explain, IconTranslate, quicklook))
+			items = append(items, resp.wordItem(phrase.Key, explain, IconTranslate))
 			existExplains[explain] = true
 		}
 	}
